@@ -1,0 +1,47 @@
+Class: Aircraft
+Responsibilities:
+    - Recieve aircraft data from transponders
+    - Read/organize data into Aircraft instance vars
+    - Continuously read/unpack transponder data as vars change
+Collaborators (if any):
+    - …
+    - …
+Assumptions (if any):
+    - Transponder is separate from ground station; doesn't need its own class/methods
+
+Class: CraftData
+Responsibilities:
+    - Get unpacked data from Aircraft
+    - Organize into database (2D array, etc.)
+    - Organize data by time of arrival/departure
+    - Continuously get info in 10 sec intervals
+Collaborators (if any):
+    - Aircraft
+Assumptions (if any):
+    - Station servers have memory to store all data from aircraft in vicinity
+
+Class: DangerSense
+Responsibilities:
+    - Continuously read CraftData database
+    - Determine whether vars create a dangerous situation
+    - Categorize instances into specific danger types (collision, mech failure, etc.)
+    - Send warning message to Display if danger
+        - Specify which aircraft and type of danger
+Collaborators (if any):
+    - CraftData
+    - Display
+Assumptions (if any):
+    - …
+
+Class: Display
+Responsibilities:
+    - Retrieve organized data updates from CraftData
+    - Display data in easily-readable format
+    - Display specific aircraft data from CraftData when prompted by controller
+    - Prioritize messages from DangerSense; overlay over other data
+    - Visually emphasize aircraft in dangerous situations (as specified by DangerSense)
+Collaborators (if any):
+    - CraftData
+    - DangerSense
+Assumptions (if any):
+    - UI designs are fairly simple
